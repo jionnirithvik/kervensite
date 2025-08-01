@@ -288,16 +288,6 @@ export default function Admin() {
           </div>
         </div>
       </header>
-                onClick={() => logoutMutation.mutate()}
-                disabled={logoutMutation.isPending}
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Déconnexion
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Statistics */}
@@ -339,12 +329,6 @@ export default function Admin() {
                     {contacts.filter(c => c.email).length}
                   </div>
                   <div className="text-gray-400">Avec Email</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-                  <div className="text-muted-foreground">Avec Email</div>
                 </div>
               </div>
             </CardContent>
