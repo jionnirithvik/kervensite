@@ -25,7 +25,7 @@ export default function AdminLogin() {
       localStorage.setItem("sessionExpiry", data.expiresAt);
       toast({
         title: "Connexion réussie",
-        description: "Bienvenue dans l'administration",
+        description: "Bienvenue dans l'administration Ralph Hxp",
       });
       setLocation("/admin");
     },
@@ -52,30 +52,30 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
+    <div className="min-h-screen bg-black flex items-center justify-center">
       {/* Theme Toggle */}
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
 
       <div className="w-full max-w-md px-4">
-        <Card>
+        <Card className="black-card-red-border red-glow">
           <CardHeader className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Shield className="h-8 w-8 text-blue-600" />
-              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                COLONEL BOOST 🚀
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <Shield className="h-8 w-8 text-red-500" />
+              <CardTitle className="text-2xl font-bold gradient-ralph">
+                RALPH HXP 🔥
               </CardTitle>
             </div>
-            <div className="text-lg font-semibold text-muted-foreground">
+            <div className="text-lg font-semibold text-gray-400">
               Administration
             </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="password" className="flex items-center space-x-2">
-                  <Lock className="h-4 w-4" />
+                <Label htmlFor="password" className="flex items-center space-x-2 text-white">
+                  <Lock className="h-4 w-4 text-red-500" />
                   <span>Mot de passe</span>
                 </Label>
                 <Input
@@ -84,13 +84,14 @@ export default function AdminLogin() {
                   placeholder="Entrez le mot de passe admin"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="bg-black border-gray-600 text-white placeholder-gray-500 focus:border-red-500 focus:ring-red-500"
                   required
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+                className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white font-bold red-glow"
                 disabled={loginMutation.isPending}
               >
                 {loginMutation.isPending ? "Connexion..." : "Se connecter"}
@@ -101,9 +102,9 @@ export default function AdminLogin() {
               <Button
                 variant="link"
                 onClick={() => setLocation("/")}
-                className="text-muted-foreground"
+                className="text-gray-400 hover:text-red-400"
               >
-                ← Retour au site public
+                ← Retour au site Ralph Hxp
               </Button>
             </div>
           </CardContent>
