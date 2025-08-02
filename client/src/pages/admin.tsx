@@ -263,23 +263,23 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-md border-b border-gray-800">
+      <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-3">
-              <Shield className="h-6 w-6 text-red-500" />
-              <div className="text-xl font-bold gradient-ralph">
-                RALPH HXP 🔥 ADMIN
+            <div className="flex items-center space-x-2">
+              <Shield className="h-6 w-6 text-blue-600" />
+              <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                COLONEL BOOST 🚀 ADMIN
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <ThemeToggle />
               <Button
                 variant="outline"
-                className="border-red-500 text-red-400 hover:bg-red-500 hover:text-white"
-                onClick={handleLogout}
+                onClick={() => logoutMutation.mutate()}
+                disabled={logoutMutation.isPending}
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Déconnexion
@@ -292,43 +292,43 @@ export default function Admin() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="black-card-red-border">
+          <Card>
             <CardContent className="pt-6">
               <div className="flex items-center">
-                <Users className="h-8 w-8 text-red-500 mr-3" />
+                <Users className="h-8 w-8 text-blue-600 mr-3" />
                 <div>
-                  <div className="text-2xl font-bold text-white">{contacts.length}</div>
-                  <div className="text-gray-400">Total Contacts</div>
+                  <div className="text-2xl font-bold">{contacts.length}</div>
+                  <div className="text-muted-foreground">Total Contacts</div>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="black-card-red-border">
+          <Card>
             <CardContent className="pt-6">
               <div className="flex items-center">
-                <Calendar className="h-8 w-8 text-red-500 mr-3" />
+                <Calendar className="h-8 w-8 text-green-600 mr-3" />
                 <div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-2xl font-bold">
                     {contacts.filter(c => 
                       new Date(c.createdAt) > new Date(Date.now() - 24 * 60 * 60 * 1000)
                     ).length}
                   </div>
-                  <div className="text-gray-400">Aujourd'hui</div>
+                  <div className="text-muted-foreground">Aujourd'hui</div>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="black-card-red-border">
+          <Card>
             <CardContent className="pt-6">
               <div className="flex items-center">
-                <FileText className="h-8 w-8 text-red-500 mr-3" />
+                <FileText className="h-8 w-8 text-purple-600 mr-3" />
                 <div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-2xl font-bold">
                     {contacts.filter(c => c.email).length}
                   </div>
-                  <div className="text-gray-400">Avec Email</div>
+                  <div className="text-muted-foreground">Avec Email</div>
                 </div>
               </div>
             </CardContent>
@@ -339,12 +339,12 @@ export default function Admin() {
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Rechercher par nom ou numéro..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-black border-gray-600 text-white placeholder-gray-500 focus:border-red-500"
+                className="pl-10"
               />
             </div>
           </div>
@@ -353,7 +353,6 @@ export default function Admin() {
             <Button
               onClick={() => handleDownload('vcf')}
               variant="outline"
-              className="border-red-500 text-red-400 hover:bg-red-500 hover:text-white"
             >
               <Download className="h-4 w-4 mr-2" />
               VCF
@@ -362,7 +361,6 @@ export default function Admin() {
             <Button
               onClick={() => handleDownload('csv')}
               variant="outline"
-              className="border-red-500 text-red-400 hover:bg-red-500 hover:text-white"
             >
               <Download className="h-4 w-4 mr-2" />
               CSV
@@ -370,18 +368,18 @@ export default function Admin() {
             
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button className="bg-red-600 hover:bg-red-700 text-white">
+                <Button variant="destructive">
                   <Trash2 className="h-4 w-4 mr-2" />
                   Tout Supprimer
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-black border-red-500">
+              <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle className="flex items-center text-white">
-                    <AlertTriangle className="h-5 w-5 text-red-500 mr-2" />
+                  <AlertDialogTitle className="flex items-center">
+                    <AlertTriangle className="h-5 w-5 text-destructive mr-2" />
                     Supprimer tous les contacts
                   </AlertDialogTitle>
-                  <AlertDialogDescription className="text-gray-400">
+                  <AlertDialogDescription>
                     Cette action est irréversible. Tous les contacts seront définitivement supprimés.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
@@ -400,47 +398,47 @@ export default function Admin() {
         </div>
 
         {/* Contacts Table */}
-        <Card className="black-card-red-border">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-white">Liste des Contacts Ralph Hxp</CardTitle>
+            <CardTitle>Liste des Contacts</CardTitle>
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="text-center py-8 text-gray-400">Chargement...</div>
+              <div className="text-center py-8">Chargement...</div>
             ) : contacts.length === 0 ? (
-              <div className="text-center py-8 text-gray-400">
+              <div className="text-center py-8 text-muted-foreground">
                 {searchQuery ? "Aucun contact trouvé" : "Aucun contact enregistré"}
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="border-gray-800">
-                      <TableHead className="text-gray-300">Nom</TableHead>
-                      <TableHead className="text-gray-300">WhatsApp</TableHead>
-                      <TableHead className="text-gray-300">Email</TableHead>
-                      <TableHead className="text-gray-300">Date</TableHead>
-                      <TableHead className="text-gray-300">Actions</TableHead>
+                    <TableRow>
+                      <TableHead>Nom</TableHead>
+                      <TableHead>WhatsApp</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {contacts.map((contact) => (
-                      <TableRow key={contact.id} className="border-gray-800 hover:bg-gray-900">
-                        <TableCell className="font-medium text-white">
+                      <TableRow key={contact.id}>
+                        <TableCell className="font-medium">
                           {contact.fullName}
                         </TableCell>
-                        <TableCell className="text-gray-300">
+                        <TableCell>
                           <div className="flex items-center space-x-2">
                             <span>{getCountryFlag(contact.countryCode)}</span>
                             <span>{contact.countryCode}{contact.whatsappNumber}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-gray-300">
+                        <TableCell>
                           {contact.email || (
-                            <span className="text-gray-500">Non fourni</span>
+                            <span className="text-muted-foreground">Non fourni</span>
                           )}
                         </TableCell>
-                        <TableCell className="text-sm text-gray-400">
+                        <TableCell className="text-sm text-muted-foreground">
                           {formatDate(contact.createdAt)}
                         </TableCell>
                         <TableCell>
@@ -448,7 +446,6 @@ export default function Admin() {
                             <Button
                               size="sm"
                               variant="outline"
-                              className="border-red-500 text-red-400 hover:bg-red-500 hover:text-white"
                               onClick={() => handleEdit(contact)}
                             >
                               <Edit className="h-3 w-3" />
