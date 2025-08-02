@@ -26,26 +26,26 @@ export function TestimonialsCarousel() {
   const currentTestimonial = TESTIMONIALS[currentIndex];
 
   return (
-    <Card className="relative">
+    <Card className="relative black-card-red-border">
       <CardContent className="p-8">
         <div className="text-center">
           <img
             src={currentTestimonial.avatar}
             alt={currentTestimonial.name}
-            className="w-16 h-16 rounded-full mx-auto mb-4 object-cover border-4 border-primary"
+            className="w-20 h-20 rounded-full mx-auto mb-6 object-cover border-4 border-red-500 red-glow"
           />
-          <blockquote className="text-muted-foreground italic mb-4 text-sm sm:text-base">
+          <blockquote className="text-gray-300 italic mb-6 text-lg leading-relaxed">
             "{currentTestimonial.message}"
           </blockquote>
-          <div className="font-semibold">{currentTestimonial.name}</div>
-          <div className="text-sm text-muted-foreground">{currentTestimonial.role}</div>
+          <div className="font-bold text-white text-lg">{currentTestimonial.name}</div>
+          <div className="text-red-400 font-medium">{currentTestimonial.role}</div>
         </div>
 
         {/* Navigation Arrows */}
         <Button
           variant="outline"
           size="icon"
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 rounded-full shadow-lg"
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 rounded-full bg-black border-red-500 text-red-500 hover:bg-red-500 hover:text-white shadow-lg red-glow"
           onClick={prevTestimonial}
         >
           <ChevronLeft className="h-4 w-4" />
@@ -53,21 +53,21 @@ export function TestimonialsCarousel() {
         <Button
           variant="outline"
           size="icon"
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full shadow-lg"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-black border-red-500 text-red-500 hover:bg-red-500 hover:text-white shadow-lg red-glow"
           onClick={nextTestimonial}
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center space-x-2 mt-6">
+        <div className="flex justify-center space-x-3 mt-8">
           {TESTIMONIALS.map((_, index) => (
             <button
               key={index}
-              className={`w-2 h-2 rounded-full transition-colors ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? "bg-primary"
-                  : "bg-muted-foreground/30"
+                  ? "bg-red-500 red-glow"
+                  : "bg-gray-600 hover:bg-red-400"
               }`}
               onClick={() => setCurrentIndex(index)}
             />
